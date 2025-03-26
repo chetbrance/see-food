@@ -26,12 +26,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://hotdogdetector.com',
-    title: 'SeeFood Hot Dog Detector',
-    description: "The ultimate hot dog detection technology. Not hot dog? We'll let you know.",
+    title: '🌭 SeeFood Hot Dog Detector',
+    description: "Is it a hot dog? 🌭 Find out with one tap! Not hot dog? We'll let you know.",
     siteName: 'SeeFood',
     images: [
       {
-        url: 'https://hotdogdetector.com/hot-dog-share.svg',
+        url: '/hot-dog-share.svg',
         width: 1200,
         height: 628,
         alt: 'SeeFood Hot Dog Detector',
@@ -40,11 +40,18 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SeeFood Hot Dog Detector',
-    description: "The ultimate hot dog detection technology. Not hot dog? We'll let you know.",
-    images: ['https://hotdogdetector.com/hot-dog-share.svg'],
+    title: '🌭 SeeFood Hot Dog Detector',
+    description: "Is it a hot dog? 🌭 Find out with one tap! Not hot dog? We'll let you know.",
+    images: ['/hot-dog-share.svg'],
     creator: '@seefood',
     site: '@seefood',
+  },
+  other: {
+    'theme-color': '#FF6B35',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'black-translucent',
+    'apple-mobile-web-app-title': 'Hot Dog Detector',
+    'format-detection': 'telephone=no',
   }
 };
 
