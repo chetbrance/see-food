@@ -6,7 +6,9 @@ const nextConfig: NextConfig = {
     domains: [],
   },
   experimental: {
-    turbo: true,
+    turbo: {
+      loaders: {},
+    },
   },
 };
 

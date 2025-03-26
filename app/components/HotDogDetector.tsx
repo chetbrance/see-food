@@ -145,8 +145,18 @@ export default function HotDogDetector() {
     <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
       {/* App header */}
       <div className="flex flex-col items-center mb-8">
-        <h1 className="text-4xl font-bold mb-2">SeeFood</h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300">Hot Dog Detector</p>
+        <div className="w-32 h-32 mb-4 relative overflow-hidden rounded-2xl shadow-lg transform hover:scale-105 transition-transform duration-300">
+          <NextImage
+            src="/seefood.png"
+            alt="SeeFood Logo"
+            width={128}
+            height={128}
+            priority
+            className="rounded-2xl" 
+          />
+        </div>
+        <h1 className="text-4xl font-bold mb-2 text-red-600">SeeFood</h1>
+        <p className="text-xl text-gray-600 dark:text-gray-300 font-medium">Hot Dog Detector</p>
       </div>
 
       {detectionState === 'idle' ? (
@@ -213,7 +223,7 @@ export default function HotDogDetector() {
                   <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                     <button 
                       onClick={() => setShowCamera(true)}
-                      className="px-6 py-3 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors flex items-center justify-center"
+                      className="px-6 py-3 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                     >
                       <span className="mr-2">📷</span>
                       Use Camera
@@ -228,7 +238,7 @@ export default function HotDogDetector() {
                       />
                       <button 
                         onClick={() => fileInputRef.current?.click()}
-                        className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors flex items-center justify-center"
+                        className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors flex items-center justify-center shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
                       >
                         <span className="mr-2">🖼️</span>
                         Upload Image
@@ -246,7 +256,7 @@ export default function HotDogDetector() {
       ) : (
         <div className="w-full max-w-lg">
           {uploadedImage && (
-            <div className="mb-6 p-2 border-4 border-yellow-400 rounded-lg">
+            <div className="mb-6 p-2 border-4 border-yellow-400 rounded-lg overflow-hidden shadow-lg">
               <img 
                 src={uploadedImage} 
                 alt="Uploaded image" 
@@ -256,7 +266,7 @@ export default function HotDogDetector() {
           )}
           
           {detectionState === 'loading' ? (
-            <div className="text-center py-6">
+            <div className="text-center py-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-6">
               <p className="text-xl mb-3">Analyzing image...</p>
               <div className="animate-pulse flex space-x-2 justify-center">
                 <div className="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -265,8 +275,8 @@ export default function HotDogDetector() {
               </div>
             </div>
           ) : detectionState === 'hotdog' ? (
-            <div className="text-center py-6 flex flex-col items-center">
-              <div className="w-32 h-32 mb-4">
+            <div className="text-center py-6 flex flex-col items-center bg-green-50 dark:bg-green-900/20 rounded-xl shadow-lg p-8 transform animate-fadeIn">
+              <div className="w-32 h-32 mb-4 transform animate-bounce-slow">
                 <NextImage
                   src="/hot-dog.svg"
                   alt="Hot Dog"
@@ -279,14 +289,14 @@ export default function HotDogDetector() {
               <p className="text-xl mb-6">Congratulations, you found a hot dog!</p>
               <button 
                 onClick={resetDetection}
-                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
               >
                 Detect Another
               </button>
             </div>
           ) : (
-            <div className="text-center py-6 flex flex-col items-center">
-              <div className="w-32 h-32 mb-4">
+            <div className="text-center py-6 flex flex-col items-center bg-red-50 dark:bg-red-900/20 rounded-xl shadow-lg p-8 transform animate-fadeIn">
+              <div className="w-32 h-32 mb-4 transform animate-shake">
                 <NextImage
                   src="/not-hot-dog.svg"
                   alt="Not Hot Dog"
@@ -299,7 +309,7 @@ export default function HotDogDetector() {
               <p className="text-xl mb-6">Sorry, this is not a hot dog.</p>
               <button 
                 onClick={resetDetection}
-                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
+                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
               >
                 Try Again
               </button>

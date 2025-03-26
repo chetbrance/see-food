@@ -15,6 +15,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Hot Dog Detector - SeeFood",
   description: "The ultimate hot dog detection technology. Not hot dog? We'll let you know.",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+    ],
+    apple: [
+      { url: '/favicon.ico' },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -25,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-900 dark:to-gray-800`}
       >
         {children}
       </body>
