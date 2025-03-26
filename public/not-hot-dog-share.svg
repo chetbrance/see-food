@@ -1,58 +1,33 @@
 <svg width="1200" height="628" viewBox="0 0 1200 628" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Fun background with gradient -->
-  <rect width="1200" height="628" fill="url(#gradient)"/>
-  <defs>
-    <linearGradient id="gradient" x1="0" y1="0" x2="1200" y2="628" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FDA4AF"/>
-      <stop offset="1" stop-color="#E11D48"/>
-    </linearGradient>
-  </defs>
+  <!-- Background -->
+  <rect width="1200" height="628" fill="#FEE2E2"/>
   
-  <!-- Fun pattern -->
-  <path d="M0 0L1200 0L1200 628L0 628L0 0Z" fill="#E11D48" fill-opacity="0.1"/>
-  <path d="M0 0L1200 0L1200 628L0 628L0 0Z" fill="url(#pattern)" fill-opacity="0.2"/>
-  <defs>
-    <pattern id="pattern" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
-      <rect x="0" y="0" width="20" height="20" fill="#E11D48"/>
-    </pattern>
-  </defs>
-  
-  <!-- Header text with shadow -->
-  <text x="600" y="120" font-family="Arial, sans-serif" font-size="72" font-weight="bold" text-anchor="middle" fill="#FFFFFF" filter="url(#shadow)">
+  <!-- Header text -->
+  <text x="600" y="100" font-family="Arial, sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="#991B1B">
     SeeFood Hot Dog Detector
   </text>
-  <defs>
-    <filter id="shadow" x="-10" y="-10" width="1220" height="648">
-      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#00000055"/>
-    </filter>
-  </defs>
   
-  <!-- Not hot dog with animation feel -->
-  <g transform="translate(450, 260) scale(2.2)">
+  <!-- Not hot dog image -->
+  <g transform="translate(500, 250) scale(1.5)">
     <!-- Hot dog base -->
     <path d="M98.42,53c-10-29.19-74.56-16.84-93.84,5.08c-17.6,20-4.11,36.63,13.14,44.37c38.65,17.36,90.7-20.26,80.7-49.44Z" fill="#FF7A59"/>
     <path d="M91.25,59.39c-3.11-13.81-43.11-17.5-67.5-3.89c-14.67,8.18-12.61,19.37-3.53,26.85c20.29,16.73,74.14-9.16,71.03-22.96Z" fill="#FFC4A8"/>
     <path d="M5,58c-7.02,8.08,84.47,33.89,92.47,9.89c4-12-84.47-18.97-92.47-9.89Z" fill="#FFE168"/>
     
-    <!-- X overlay with animation feel -->
+    <!-- X overlay -->
     <g transform="translate(-10, -10)">
-      <circle cx="100" cy="80" r="70" fill="#FF3B30" opacity="0.3"/>
-      <path d="M65,45 L135,115 M135,45 L65,115" stroke="#FF3B30" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="100" cy="80" r="70" fill="#FF3B30" opacity="0.2"/>
+      <path d="M65,45 L135,115 M135,45 L65,115" stroke="#FF3B30" stroke-width="8" stroke-linecap="round"/>
     </g>
   </g>
   
-  <!-- Emoji decorations -->
-  <text x="300" y="260" font-family="Arial, sans-serif" font-size="80" text-anchor="middle">❌</text>
-  <text x="900" y="260" font-family="Arial, sans-serif" font-size="80" text-anchor="middle">🤔</text>
-  
-  <!-- Result text with fun style -->
-  <text x="600" y="480" font-family="Arial, sans-serif" font-size="96" font-weight="bold" text-anchor="middle" fill="#FFFFFF" filter="url(#shadow)">
-    NOT HOT DOG! 🚫
+  <!-- Result text -->
+  <text x="600" y="450" font-family="Arial, sans-serif" font-size="96" font-weight="bold" text-anchor="middle" fill="#DC2626">
+    NOT HOT DOG!
   </text>
   
-  <!-- Call to action -->
-  <rect x="400" y="510" width="400" height="60" rx="30" fill="#FFFFFF"/>
-  <text x="600" y="552" font-family="Arial, sans-serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#E11D48">
-    Tap to detect your food!
+  <!-- Website URL -->
+  <text x="600" y="550" font-family="Arial, sans-serif" font-size="32" font-weight="normal" text-anchor="middle" fill="#4B5563">
+    hotdogdetector.com
   </text>
 </svg>
