@@ -142,55 +142,21 @@ export default function HotDogDetector() {
   };
 
   const shareToX = async (isHotDog: boolean) => {
-    if (!uploadedImage) {
-      // If there's no image (this shouldn't happen as the button only appears after detection)
-      // Default to the simple sharing mechanism
-      const emoji = isHotDog ? "🌭" : "🚫🌭";
-      const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
-      const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Try it yourself:`;
-      const url = "https://hotdogdetector.com";
-      const hashtags = "HotDogDetector,SeeFood,SiliconValley";
-      
-      const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
-      window.open(shareUrl, '_blank');
-      return;
-    }
+    // Create a direct X.com share that doesn't rely on server-side storage
+    const emoji = isHotDog ? "🌭" : "🚫🌭";
+    const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
     
-    try {
-      // First, save the image data to our API
-      const response = await fetch('/api/share', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          imageData: uploadedImage,
-          isHotDog: isHotDog,
-        }),
-      });
-      
-      if (!response.ok) {
-        throw new Error('Failed to create share');
-      }
-      
-      const data = await response.json();
-      const { shareUrl } = data;
-      
-      // Create a more engaging message that includes their result
-      const emoji = isHotDog ? "🌭" : "🚫🌭";
-      const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
-      const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Check out my result:`;
-      const hashtags = "HotDogDetector,SeeFood,SiliconValley";
-      
-      // Build the share URL for X.com that includes our share page URL
-      const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
-      
-      // Open the share dialog
-      window.open(twitterUrl, '_blank');
-    } catch (error) {
-      console.error('Share error:', error);
-      alert('Sorry, there was a problem sharing your image. Please try again.');
-    }
+    // Create a more engaging message
+    const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Try it yourself:`;
+    
+    const url = "https://hotdogdetector.com";
+    const hashtags = "HotDogDetector,SeeFood,SiliconValley";
+    
+    // Build the share URL for X.com
+    const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
+    
+    // Open the share dialog
+    window.open(shareUrl, '_blank');
   };
 
   return (
