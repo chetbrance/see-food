@@ -56,9 +56,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-900 dark:to-gray-800`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-gray-900 dark:to-gray-800 flex flex-col`}
       >
-        {children}
+        <div className="flex-grow">
+          {children}
+        </div>
+        <footer className="text-center py-4 text-sm text-gray-600 dark:text-gray-400">
+          <div>
+            Made by <a href="https://www.brett.world/" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-900 dark:hover:text-white">Brett</a> | <a href="https://github.com/chetbrance/see-food" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-900 dark:hover:text-white">Source Code</a>
+          </div>
+        </footer>
       </body>
     </html>
   );
