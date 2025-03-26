@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hot Dog Detector - SeeFood App
+
+A hot dog detection app inspired by the Silicon Valley TV show. This app determines whether an image contains a hot dog or not (aka: "Not Hot Dog").
+
+## Features
+
+- 🌭 Detect hot dogs in images with AI
+- 📸 Take photos with your camera
+- 🖼️ Upload images from your device
+- 🤣 Fun and humorous UI inspired by the show
+
+## Technology Stack
+
+- Next.js
+- TypeScript
+- TensorFlow.js with MobileNet model
+- React Webcam for camera integration
+- Tailwind CSS for styling
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+Then, run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## How It Works
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The app uses TensorFlow.js and a pre-trained MobileNet model to classify images. When you upload or take a photo, the app analyzes it to determine if it contains a hot dog. The model is loaded and run entirely in the browser - no server-side processing needed!
 
-## Learn More
+## Quote from the Show
 
-To learn more about Next.js, take a look at the following resources:
+> "What would you say if I told you there is an app on the market that could tell you if you have a hot dog or not a hot dog?"
+> 
+> - Jian-Yang, Silicon Valley
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
