@@ -141,24 +141,56 @@ export default function HotDogDetector() {
     }
   };
 
-  const shareToX = (isHotDog: boolean) => {
-    // Create the share text
-    const text = isHotDog 
-      ? "I found a HOT DOG! 🌭 Try SeeFood - the BEST app that detects hot dogs." 
-      : "NOT HOT DOG! 🚫🌭 Try SeeFood - the BEST app that detects hot dogs.";
+  const shareToX = async (isHotDog: boolean) => {
+    if (!uploadedImage) {
+      // If there's no image (this shouldn't happen as the button only appears after detection)
+      // Default to the simple sharing mechanism
+      const emoji = isHotDog ? "🌭" : "🚫🌭";
+      const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
+      const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Try it yourself:`;
+      const url = "https://hotdogdetector.com";
+      const hashtags = "HotDogDetector,SeeFood,SiliconValley";
+      
+      const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
+      window.open(shareUrl, '_blank');
+      return;
+    }
     
-    const url = "https://hotdogdetector.com";
-    const hashtags = "HotDogDetector,SeeFood,SiliconValley";
-    
-    // With Twitter Cards, X.com will display our custom image if the site implements proper meta tags
-    // For now, let's just share with text and URL
-    // In a full production app, you'd set up OpenGraph meta tags on the server
-    
-    // Build the share URL for X.com
-    const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
-    
-    // Open the share dialog
-    window.open(shareUrl, '_blank');
+    try {
+      // First, save the image data to our API
+      const response = await fetch('/api/share', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          imageData: uploadedImage,
+          isHotDog: isHotDog,
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to create share');
+      }
+      
+      const data = await response.json();
+      const { shareUrl } = data;
+      
+      // Create a more engaging message that includes their result
+      const emoji = isHotDog ? "🌭" : "🚫🌭";
+      const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
+      const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Check out my result:`;
+      const hashtags = "HotDogDetector,SeeFood,SiliconValley";
+      
+      // Build the share URL for X.com that includes our share page URL
+      const twitterUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(shareUrl)}&hashtags=${encodeURIComponent(hashtags)}`;
+      
+      // Open the share dialog
+      window.open(twitterUrl, '_blank');
+    } catch (error) {
+      console.error('Share error:', error);
+      alert('Sorry, there was a problem sharing your image. Please try again.');
+    }
   };
 
   return (
