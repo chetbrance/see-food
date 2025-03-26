@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 
-type Props = {
-  params: { id: string }
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
   const id = params.id;
   
   return {
@@ -33,5 +31,5 @@ export default function ShareLayout({
 }: {
   children: React.ReactNode
 }) {
-  return children;
+  return <>{children}</>;
 } 
