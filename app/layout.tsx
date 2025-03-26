@@ -23,6 +23,29 @@ export const metadata: Metadata = {
       { url: '/favicon.ico' },
     ],
   },
+  openGraph: {
+    type: 'website',
+    url: 'https://hotdogdetector.com',
+    title: 'SeeFood Hot Dog Detector',
+    description: "The ultimate hot dog detection technology. Not hot dog? We'll let you know.",
+    siteName: 'SeeFood',
+    images: [
+      {
+        url: 'https://hotdogdetector.com/hot-dog-share.svg',
+        width: 1200,
+        height: 628,
+        alt: 'SeeFood Hot Dog Detector',
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SeeFood Hot Dog Detector',
+    description: "The ultimate hot dog detection technology. Not hot dog? We'll let you know.",
+    images: ['https://hotdogdetector.com/hot-dog-share.svg'],
+    creator: '@seefood',
+    site: '@seefood',
+  }
 };
 
 export default function RootLayout({

@@ -141,6 +141,26 @@ export default function HotDogDetector() {
     }
   };
 
+  const shareToX = (isHotDog: boolean) => {
+    // Create the share text
+    const text = isHotDog 
+      ? "I found a HOT DOG! 🌭 Try SeeFood - the BEST app that detects hot dogs." 
+      : "NOT HOT DOG! 🚫🌭 Try SeeFood - the BEST app that detects hot dogs.";
+    
+    const url = "https://hotdogdetector.com";
+    const hashtags = "HotDogDetector,SeeFood,SiliconValley";
+    
+    // With Twitter Cards, X.com will display our custom image if the site implements proper meta tags
+    // For now, let's just share with text and URL
+    // In a full production app, you'd set up OpenGraph meta tags on the server
+    
+    // Build the share URL for X.com
+    const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
+    
+    // Open the share dialog
+    window.open(shareUrl, '_blank');
+  };
+
   return (
     <div className="flex flex-col items-center w-full max-w-3xl mx-auto">
       {/* App header */}
@@ -287,12 +307,23 @@ export default function HotDogDetector() {
               </div>
               <h2 className="text-4xl font-bold text-green-500 mb-2">HOT DOG!</h2>
               <p className="text-xl mb-6">Congratulations, you found a hot dog!</p>
-              <button 
-                onClick={resetDetection}
-                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
-              >
-                Detect Another
-              </button>
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                <button 
+                  onClick={resetDetection}
+                  className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                >
+                  Detect Another
+                </button>
+                <button 
+                  onClick={() => shareToX(true)}
+                  className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center"
+                >
+                  <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                  Share to X
+                </button>
+              </div>
             </div>
           ) : (
             <div className="text-center py-6 flex flex-col items-center bg-red-50 dark:bg-red-900/20 rounded-xl shadow-lg p-8 transform animate-fadeIn">
@@ -307,12 +338,23 @@ export default function HotDogDetector() {
               </div>
               <h2 className="text-4xl font-bold text-red-500 mb-2">NOT HOT DOG!</h2>
               <p className="text-xl mb-6">Sorry, this is not a hot dog.</p>
-              <button 
-                onClick={resetDetection}
-                className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
-              >
-                Try Again
-              </button>
+              <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                <button 
+                  onClick={resetDetection}
+                  className="px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200"
+                >
+                  Try Again
+                </button>
+                <button 
+                  onClick={() => shareToX(false)}
+                  className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center"
+                >
+                  <svg className="w-4 h-4 mr-2" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                  Share to X
+                </button>
+              </div>
             </div>
           )}
         </div>
