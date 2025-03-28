@@ -23,9 +23,7 @@ export default function HotDogDetector() {
     async function loadModel() {
       setIsModelLoading(true);
       try {
-        // Load TensorFlow.js
         await tf.ready();
-        // Load the MobileNet model
         const loadedModel = await mobilenet.load();
         setModel(loadedModel);
       } catch (error) {
@@ -39,10 +37,19 @@ export default function HotDogDetector() {
     
     // Cleanup function
     return () => {
-      // Model cleanup handled by TensorFlow.js
       setModel(null);
     };
   }, []);
+
+  // When both the model and an image are available, run detection.
+  useEffect(() => {
+    if (model && uploadedImage && detectionState === 'idle') {
+      const img = new window.Image();
+      img.onload = () => detectHotDog(img);
+      img.onerror = (e) => console.error("Error loading image:", e);
+      img.src = uploadedImage;
+    }
+  }, [model, uploadedImage, detectionState]);
 
   const detectHotDog = async (imageElement: HTMLImageElement) => {
     if (!model) {
@@ -54,22 +61,18 @@ export default function HotDogDetector() {
     
     try {
       console.log("Starting classification...");
-      // Classify the image
       const predictions = await model.classify(imageElement);
       console.log("Raw predictions:", predictions);
       
-      // Check if any prediction contains hot dog or similar terms
       const isHotDog = predictions.some(p => {
         const className = p.className.toLowerCase();
         const isMatch = className.includes('hot dog') || 
-                       className.includes('hotdog') ||
-                       className.includes('frankfurter') ||
-                       className.includes('wiener');
-        
+                        className.includes('hotdog') ||
+                        className.includes('frankfurter') ||
+                        className.includes('wiener');
         if (isMatch) {
           console.log(`Matched "${p.className}" with confidence ${p.probability.toFixed(4)}`);
         }
-        
         return isMatch;
       });
       
@@ -77,7 +80,7 @@ export default function HotDogDetector() {
       setDetectionState(isHotDog ? 'hotdog' : 'nothotdog');
     } catch (error) {
       console.error("Detection error:", error);
-      setDetectionState('nothotdog'); // Default to not hot dog on error
+      setDetectionState('nothotdog');
     }
   };
 
@@ -88,12 +91,8 @@ export default function HotDogDetector() {
     const reader = new FileReader();
     reader.onload = (event) => {
       const imageDataUrl = event.target?.result as string;
+      // Just store the image; detection will be triggered by useEffect
       setUploadedImage(imageDataUrl);
-      
-      // Create an image element for the model to analyze
-      const img = new window.Image();
-      img.onload = () => detectHotDog(img);
-      img.src = imageDataUrl;
     };
     reader.readAsDataURL(file);
   };
@@ -111,18 +110,8 @@ export default function HotDogDetector() {
       console.log("Captured image:", imageSrc ? "Image captured successfully" : "No image captured");
       
       if (imageSrc) {
+        // Store the image; detection will run in the useEffect once the model is ready.
         setUploadedImage(imageSrc);
-        
-        // Create an image element for the model to analyze
-        const img = new window.Image();
-        img.onload = () => {
-          console.log("Image loaded for detection");
-          detectHotDog(img);
-        };
-        img.onerror = (e) => {
-          console.error("Error loading image:", e);
-        };
-        img.src = imageSrc;
       } else {
         console.error("Failed to capture image from webcam");
       }
@@ -142,20 +131,12 @@ export default function HotDogDetector() {
   };
 
   const shareToX = async (isHotDog: boolean) => {
-    // Create a direct X.com share that doesn't rely on server-side storage
     const emoji = isHotDog ? "🌭" : "🚫🌭";
     const result = isHotDog ? "HOT DOG" : "NOT HOT DOG";
-    
-    // Create a more engaging message
     const text = `${emoji} ${result}! I just used SeeFood to analyze my food photo. Try it yourself:`;
-    
     const url = "https://hotdogdetector.com";
     const hashtags = "HotDogDetector,SeeFood,SiliconValley";
-    
-    // Build the share URL for X.com
     const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
-    
-    // Open the share dialog
     window.open(shareUrl, '_blank');
   };
 
@@ -365,4 +346,4 @@ export default function HotDogDetector() {
       </div>
     </div>
   );
-} 
+}
